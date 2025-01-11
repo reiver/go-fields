@@ -83,6 +83,60 @@ func (receiver *Hierarchical[T]) equal(other *Hierarchical[T]) bool {
 	return true
 }
 
+func (receiver *Hierarchical[T]) ForEach(fn func(T,...string)error) error {
+        if nil == receiver {
+                return nil
+        }
+
+        receiver.mutex.Lock()
+        defer receiver.mutex.Unlock()
+
+        return receiver.forEach(fn)
+}
+
+func (receiver *Hierarchical[T]) forEach(fn func(T,...string)error, prefix ...string) error {
+        if nil == receiver {
+                return nil
+        }
+
+	err := receiver.values.forEach(func(value T, key string)error{
+                value, found := receiver.values.get(key)
+                if !found {
+			return nil
+                }
+
+		var a []string = append([]string(nil), prefix...)
+		a = append(a, key)
+
+                err := fn(value, a...)
+                if nil != err {
+                        return err
+                }
+
+		return nil
+	})
+	if nil != err {
+		return err
+	}
+
+	var subkeys []string = receiver.subkeys()
+
+	for _, subkey := range subkeys {
+		sub, found := receiver.subs[subkey]
+		if !found {
+	/////////////// CONTINUE
+			continue
+		}
+
+		var a []string = append([]string(nil), prefix...)
+		a = append(a, subkey)
+
+		sub.forEach(fn, a...)
+	}
+
+        return nil
+}
+
 func (receiver *Hierarchical[T]) Set(value T, name ...string) {
 	if nil == receiver {
 		return
@@ -132,4 +186,12 @@ func (receiver *Hierarchical[T]) setLocal(value T, name string) {
 	}
 
 	receiver.values.set(value, name)
+}
+
+func (receiver *Hierarchical[T]) subkeys() []string {
+	if nil == receiver {
+		return nil
+	}
+
+	return sortedKeys(receiver.subs)
 }
