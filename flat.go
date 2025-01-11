@@ -1,6 +1,7 @@
 package fields
 
 import (
+	"reflect"
 	"sync"
 )
 
@@ -20,6 +21,52 @@ func (receiver *Flat[T]) init() {
 	if nil == receiver.values {
 		receiver.values = map[string]T{}
 	}
+}
+
+func (receiver *Flat[T]) ChainSet(value T, name string) *Flat[T] {
+	if nil == receiver {
+		return nil
+	}
+
+	receiver.Set(value, name)
+	return receiver
+}
+
+func (receiver *Flat[T]) ChainUnset(name string) *Flat[T] {
+	if nil == receiver {
+		return nil
+	}
+
+	receiver.Unset(name)
+	return receiver
+}
+
+func (receiver *Flat[T]) Equal(other *Flat[T]) bool {
+	if receiver == other {
+		return true
+	}
+
+	receiver.mutex.Lock()
+	defer receiver.mutex.Unlock()
+
+	other.mutex.Lock()
+	defer other.mutex.Unlock()
+
+	return receiver.equal(other)
+}
+
+func (receiver *Flat[T]) equal(other *Flat[T]) bool {
+	if receiver == other {
+		return true
+	}
+	if nil == receiver {
+		return false
+	}
+	if nil == other {
+		return false
+	}
+
+	return reflect.DeepEqual(receiver.values, other.values)
 }
 
 func (receiver *Flat[T]) Get(name string) (T, bool) {
