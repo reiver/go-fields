@@ -49,6 +49,29 @@ func (receiver *Flat[T]) get(name string) (T, bool) {
 	return value, found
 }
 
+func (receiver *Flat[T]) ForEach(fn func(T,string)error) error {
+	if nil == receiver {
+		return nil
+	}
+
+	var keys []string = receiver.keys()
+
+	for _, key := range keys {
+		value, found := receiver.get(key)
+		if !found {
+	/////////////// CONTINUE
+			continue
+		}
+
+		err := fn(value, key)
+		if nil != err {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (receiver *Flat[T]) Keys() []string {
 	if nil == receiver {
 		return []string{}
