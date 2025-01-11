@@ -5,7 +5,7 @@ import (
 	"sync"
 )
 
-// Flat is a thread-safe set key-value / name-value pairs.
+// Flat is a thread-safe set of key-value / name-value pairs.
 //
 // It is a thread-safe version of map[string]T
 type Flat[T any] struct {
