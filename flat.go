@@ -68,6 +68,25 @@ func (receiver *Flat[T]) keys() []string {
 	return sortedKeys(receiver.values)
 }
 
+func (receiver *Flat[T]) Len() int {
+	if nil == receiver {
+		return 0
+	}
+
+	receiver.mutex.Lock()
+	defer receiver.mutex.Unlock()
+
+	return receiver.len()
+}
+
+func (receiver *Flat[T]) len() int {
+	if nil == receiver {
+		return 0
+	}
+
+	return len(receiver.values)
+}
+
 func (receiver *Flat[T]) Set(value T, name string) {
 	if nil == receiver {
 		return
