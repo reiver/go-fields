@@ -54,6 +54,17 @@ func (receiver *Flat[T]) ForEach(fn func(T,string)error) error {
 		return nil
 	}
 
+	receiver.mutex.Lock()
+	defer receiver.mutex.Unlock()
+
+	return receiver.forEach(fn)
+}
+
+func (receiver *Flat[T]) forEach(fn func(T,string)error) error {
+	if nil == receiver {
+		return nil
+	}
+
 	var keys []string = receiver.keys()
 
 	for _, key := range keys {
