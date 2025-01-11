@@ -69,7 +69,7 @@ func TestFlat_Set_string(t *testing.T) {
 		expected := test.Expected
 
 		if !reflect.DeepEqual(expected, actual) {
-			t.Errorf("For test #%d, the actual flat-fields it not what was expected", testNumber)
+			t.Errorf("For test #%d, the actual flat-set it not what was expected", testNumber)
 			t.Logf("EXPECTED: (%d)\n%#v", len(expected), expected)
 			t.Logf("ACTUAL:   (%d)\n%#v", len(actual), actual)
 			t.Logf("KEYS: (%d)\n%#v", len(test.Keys), test.Keys)
