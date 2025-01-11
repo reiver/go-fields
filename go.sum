@@ -1,0 +1,10 @@
+github.com/reiver/go-ascii v0.0.0-20241231150941-77b5f046e732 h1:ZuWdUYMnbfBtCN/FpAPceMw1kNYNH1eGslBFmqMLTMc=
+github.com/reiver/go-ascii v0.0.0-20241231150941-77b5f046e732/go.mod h1:f43/Y1zpLvqorZN0BelarPzO2GrotAQrBy3T08NUSTM=
+github.com/reiver/go-erorr v0.0.0-20240801233437-8cbde6d1fa3f h1:D1QSxKHm8U73XhjsW3SFLkT0zT5pKJi+1KGboMhY1Rk=
+github.com/reiver/go-erorr v0.0.0-20240801233437-8cbde6d1fa3f/go.mod h1:F0HbBf+Ak2ZlE8YkDW4Y+KxaUmT0KaaIJK6CXY3cJxE=
+github.com/reiver/go-humane v0.0.0-20250101051026-1edff680dc45 h1:2JakqwjPRsBKUoTHXMX9mddtCrVOImgkj2KxyLek+Zk=
+github.com/reiver/go-humane v0.0.0-20250101051026-1edff680dc45/go.mod h1:jfTsMX5lkwcv6mnIU/yrkUajKg8zzEgZuPRy1FonHr4=
+github.com/reiver/go-json v0.0.0-20241213105958-0fd2a5bb4dd8 h1:GVHQl0cdITUj8EHeGi/v4n7H7DCRDLIiLcUXjFKes/U=
+github.com/reiver/go-json v0.0.0-20241213105958-0fd2a5bb4dd8/go.mod h1:ns4kpzbK+OyMUZYT8UmBxrsYWNmvB/irZGmyIh99cxY=
+github.com/reiver/go-lck v0.0.0-20240808133902-b56df221c39f h1:KBVWBoNIM8mHkUR3dP64hm2p2vxoD5xHZ6wUllCjFTc=
+github.com/reiver/go-lck v0.0.0-20240808133902-b56df221c39f/go.mod h1:PFseSi8S0CBkc+YB6jYWtogPk83LumclnYJZZBQJJhs=
