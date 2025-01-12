@@ -137,6 +137,25 @@ func (receiver *Hierarchical[T]) forEach(fn func(T,...string)error, prefix ...st
         return nil
 }
 
+func (receiver *Hierarchical[T]) IsEmpty() bool {
+	if nil == receiver {
+		return true
+	}
+
+	receiver.mutex.Lock()
+	defer receiver.mutex.Unlock()
+
+	return receiver.isEmpty()
+}
+
+func (receiver *Hierarchical[T]) isEmpty() bool {
+	if nil == receiver {
+		return true
+	}
+
+	return receiver.values.isEmpty() && len(receiver.subs) <= 0
+}
+
 func (receiver *Hierarchical[T]) Set(value T, name ...string) {
 	if nil == receiver {
 		return
