@@ -130,6 +130,25 @@ func (receiver *Flat[T]) forEach(fn func(T,string)error) error {
 	return nil
 }
 
+func (receiver *Flat[T]) IsEmpty() bool {
+	if nil == receiver {
+		return true
+	}
+
+	receiver.mutex.Lock()
+	defer receiver.mutex.Unlock()
+
+	return receiver.isEmpty()
+}
+
+func (receiver *Flat[T]) isEmpty() bool {
+	if nil == receiver {
+		return true
+	}
+
+	return receiver.len() <= 0
+}
+
 func (receiver *Flat[T]) Keys() []string {
 	if nil == receiver {
 		return []string{}
