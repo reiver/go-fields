@@ -228,3 +228,23 @@ func (receiver *Flat[T]) unset(name string) {
 
 	delete(receiver.values, name)
 }
+
+func (receiver *Flat[T]) UnsetAll() {
+	if nil == receiver {
+		return
+	}
+
+	receiver.mutex.Lock()
+	defer receiver.mutex.Unlock()
+
+	receiver.unsetAll()
+}
+
+
+func (receiver *Flat[T]) unsetAll() {
+	if nil == receiver {
+		return
+	}
+
+	receiver.values = nil
+}
