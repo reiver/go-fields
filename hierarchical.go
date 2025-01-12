@@ -214,3 +214,23 @@ func (receiver *Hierarchical[T]) subkeys() []string {
 
 	return sortedKeys(receiver.subs)
 }
+
+func (receiver *Hierarchical[T]) UnsetAll() {
+	if nil == receiver {
+		return
+	}
+
+	receiver.mutex.Lock()
+	defer receiver.mutex.Unlock()
+
+	receiver.unsetAll()
+}
+
+func (receiver *Hierarchical[T]) unsetAll() {
+	if nil == receiver {
+		return
+	}
+
+	receiver.values.unsetAll()
+	receiver.subs = nil
+}
